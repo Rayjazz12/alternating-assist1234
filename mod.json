@@ -1,5 +1,5 @@
 {
-	"geode": "4.0.0",
+	"geode": "5.11.2",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
@@ -9,7 +9,7 @@
 	"id": "alternating.assist",
 	"name": "Alternating Assist",
 	"version": "v1.0.0",
-	"developer": "YourName",
+	"developer": "RayjazzTheGoat",
 	"description": "Helps you spam faster and easier by assisting your alternating, with stages 1-4 and Max.",
 	"dependencies": {
 		"geode.node-ids": ">=v1.23.3"
