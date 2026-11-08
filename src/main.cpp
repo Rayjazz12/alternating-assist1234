@@ -53,20 +53,30 @@ class $modify(AssistGameLayer, GJBaseGameLayer) {
 	void handleButton(bool down, int button, bool isPlayer1) {
 		GJBaseGameLayer::handleButton(down, button, isPlayer1);
 
+		// ignore the clicks the assist itself sends (this was breaking hold:
+		// our own release made the mod think you let go)
+		if (assist::injecting) return;
 		if (button != 1) return;
 		if (!typeinfo_cast<PlayLayer*>(this)) return; // not the editor
 
 		auto& h = assist::holds[isPlayer1 ? 0 : 1];
-		h.held = down;
-		h.down = down;
-		h.timer = 0.f;
+		if (down) {
+			h.pressed++;
+			h.down = true;
+			h.timer = 0.f;
+		} else {
+			// alternating: releasing one finger while another is still down
+			// must NOT stop the assist
+			if (h.pressed > 0) h.pressed--;
+			h.down = false;
+		}
 	}
 
 	void update(float dt) {
 		if (assist::enabled && typeinfo_cast<PlayLayer*>(this)) {
 			for (int i = 0; i < 2; i++) {
 				auto& h = assist::holds[i];
-				if (!h.held) continue;
+				if (!h.held()) continue;
 
 				bool toggle = false;
 				float cps = assist::CPS[assist::stage];
@@ -84,7 +94,9 @@ class $modify(AssistGameLayer, GJBaseGameLayer) {
 				if (toggle) {
 					h.down = !h.down;
 					// call the ORIGINAL so we don't re-trigger our own hook
+					assist::injecting = true;
 					GJBaseGameLayer::handleButton(h.down, 1, i == 0);
+					assist::injecting = false;
 				}
 			}
 		}

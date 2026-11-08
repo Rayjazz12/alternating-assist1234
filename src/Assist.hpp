@@ -41,11 +41,15 @@ namespace assist {
 
 	// Per-player hold state (index 0 = player 1, 1 = player 2)
 	struct Hold {
-		bool held = false;   // the real button is physically held
+		int pressed = 0;     // how many REAL presses are currently held (alternating = 2 fingers)
 		bool down = false;   // the button state we last sent to the game
 		float timer = 0.f;
+		bool held() const { return pressed > 0; }
 	};
 	inline Hold holds[2];
+
+	// true while WE are sending a click, so our hook ignores our own clicks
+	inline bool injecting = false;
 
 	inline void resetHolds() {
 		holds[0] = Hold{};

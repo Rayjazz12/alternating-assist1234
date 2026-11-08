@@ -4,9 +4,8 @@ Alternating is a technique for spamming faster and more consistently in Geometry
 
 ## How to use
 1. Open the pause menu and press the green **AA** button.
-2. Turn the assist **On** or **Off** with the checkbox.
-3. Pick a stage: **1, 2, 3, 4 or Max**.
-4. Hold your jump button in a level and the assist spams for you.
+2. Pick **Off**, a stage (**1, 2, 3, 4**) or **Max** - the speed meter glides to show how fast it is.
+3. Hold your jump button in a level and the assist spams for you.
 
 | Stage | Speed |
 |-------|-------|

@@ -8,7 +8,7 @@
 	},
 	"id": "alternating.assist",
 	"name": "Alternating Assist",
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"developer": "RayjazzTheGoat",
 	"description": "Helps you spam faster and easier by assisting your alternating, with stages 1-4 and Max.",
 	"dependencies": {
